@@ -65,10 +65,44 @@ async function queryServer() {
         if (data.online === true) {
             const onlineCount = data.players?.online ?? 0;
             const maxCount = data.players?.max ?? '?';
+            // ★★★ 获取玩家列表（字符串数组） ★★★
+            const playerList = data.players?.list || [];
+
             let motdText = '暂无欢迎语';
             if (data.motd) {
                 if (typeof data.motd.clean === 'string') motdText = data.motd.clean;
                 else if (Array.isArray(data.motd.clean)) motdText = data.motd.clean.join(' ');
+            }
+
+            // ★★★ 生成玩家列表 HTML ★★★
+            let playerListHtml = '';
+            if (playerList.length > 0) {
+                playerListHtml = `
+                    <div style="margin-top: 14px; text-align: left; max-width: 100%;">
+                        <div style="color: #8aaa8a; font-size: 13px; margin-bottom: 10px; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 14px;">
+                            👥 在线玩家（${playerList.length}人）
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+                            ${playerList.map(name => `
+                                <span style="background: rgba(74, 222, 128, 0.08); 
+                                             border: 1px solid rgba(74, 222, 128, 0.15); 
+                                             padding: 4px 16px; 
+                                             border-radius: 30px; 
+                                             font-size: 14px; 
+                                             color: #b0e0b0;
+                                             font-family: 'Courier New', monospace;">
+                                    🎮 ${name}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                playerListHtml = `
+                    <div style="color: #6a8a6a; font-size: 13px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 14px;">
+                        🌙 服务器空无一人，等待冒险者...
+                    </div>
+                `;
             }
 
             panel.innerHTML = `
@@ -76,6 +110,7 @@ async function queryServer() {
                 <div class="player-count">${onlineCount} <span>/ ${maxCount}</span></div>
                 <div style="color: #6a8a6a; font-size: 12px;">✦ 当前在线人数 ✦</div>
                 <div class="motd-text">📢 ${motdText}</div>
+                ${playerListHtml}
             `;
         } else {
             panel.innerHTML = `
