@@ -297,17 +297,132 @@ body {
 }
 
 /* ===== 响应式 ===== */
-@media (max-width: 650px) {
-    .card { padding: 28px 18px; }
-    .header { flex-direction: column; align-items: flex-start; gap: 15px; }
-    .id-group h1 { font-size: 26px; }
-    .game-duo { grid-template-columns: 1fr; }
-    .contact-row { flex-wrap: wrap; }
-    .contact-value { font-size: 16px; min-width: 120px; }
-    .btn-copy { padding: 6px 16px; font-size: 13px; }
+
+/* 平板和小屏笔记本 (小于 900px) */
+@media (max-width: 900px) {
+    .card {
+        padding: 30px 24px;
+    }
 }
+
+/* ===== 手机端 (小于 650px) ===== */
+@media (max-width: 650px) {
+    .card {
+        padding: 24px 16px;
+        border-radius: 32px;
+    }
+
+    /* 头部：改为竖排，文字居中 */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .id-group h1 {
+        font-size: 26px;
+    }
+
+    .alias {
+        justify-content: center;
+    }
+    .alias span {
+        font-size: 14px;
+    }
+
+    /* 游戏卡片：从两列变一列 */
+    .game-duo {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .game-card {
+        padding: 16px 18px;
+    }
+    .game-card .g-name {
+        font-size: 18px;
+    }
+    .game-card .g-desc {
+        font-size: 13px;
+    }
+
+    /* ===== 联系方式（手机重点优化） ===== */
+    .contact-section {
+        padding: 16px 16px;
+        border-radius: 20px;
+    }
+
+    .contact-row {
+        flex-wrap: wrap;
+        gap: 10px 8px;
+        padding: 8px 0;
+    }
+
+    .contact-label {
+        font-size: 14px;
+        min-width: 40px;
+    }
+    .contact-label .c-icon {
+        font-size: 18px;
+    }
+
+    /* QQ号/邮箱 文本 */
+    .contact-value {
+        font-size: 15px;
+        padding: 6px 12px;
+        min-width: 100px;
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    /* ★★★ 关键优化：按钮变大，方便手指点击（至少 44px 高度） ★★★ */
+    .btn-copy,
+    .contact-row a.btn-copy {
+        padding: 10px 18px;
+        font-size: 14px;
+        min-height: 44px;
+        min-width: 80px;
+        justify-content: center;
+    }
+
+    /* B站按钮单独调整，确保和复制按钮对齐 */
+    .contact-row a.btn-copy {
+        flex: 0 0 auto;
+    }
+
+    /* 底部文字 */
+    .footer {
+        font-size: 11px;
+        margin-top: 20px;
+    }
+}
+
+/* ===== 超小屏手机 (小于 400px) ===== */
 @media (max-width: 400px) {
-    .id-group h1 { font-size: 22px; }
-    .alias span { font-size: 13px; }
-    .game-card .g-name { font-size: 17px; }
+    .id-group h1 {
+        font-size: 22px;
+    }
+
+    .alias span {
+        font-size: 12px;
+    }
+
+    .contact-value {
+        font-size: 13px;
+        padding: 4px 8px;
+        min-width: 80px;
+    }
+
+    .btn-copy,
+    .contact-row a.btn-copy {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 38px;
+        min-width: 60px;
+    }
+
+    .game-card .g-name {
+        font-size: 16px;
+    }
 }
