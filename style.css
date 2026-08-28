@@ -311,8 +311,3 @@ body {
     .alias span { font-size: 13px; }
     .game-card .g-name { font-size: 17px; }
 }
-/* B站链接悬停效果 */
-.contact-row a.contact-value:hover {
-    color: #ff6b9d !important;
-    text-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
-}
