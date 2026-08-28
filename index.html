@@ -4,82 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>耿星落</title>
-    <!-- 引入外部样式表 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
 
-        <!-- ====== 头部：头像 + 多ID ====== -->
-        <div class="header">
-            <div class="avatar">⭐</div>
-            <div class="id-group">
-                <h1><span class="highlight">耿星落</span></h1>
-                <div class="alias">
-                    <span>梦琳溪</span>
-                    <span>Star_Moon_win</span>
-                </div>
-            </div>
+<div class="card">
+
+    <!-- ====== 头部：头像 + 多ID ====== -->
+    <div class="header">
+        <div class="avatar">
+            <img src="touxiang.jpg" alt="头像">
         </div>
-
-        <!-- ====== 游戏偏好 ====== -->
-        <div class="games-section">
-            <div class="section-label">🎯 主玩游戏</div>
-            <div class="game-duo">
-                <!-- MC 卡片 -->
-                <div class="game-card game-mc">
-                    <div class="g-header">
-                        <span class="g-icon">⛏️</span>
-                        <span class="g-name">我的世界</span>
-                    </div>
-                    <div class="g-desc">
-                        建筑 & 生电 & 整合包爱好者<br>喜欢研究机械动力
-                    </div>
-                    <div class="g-tags">
-                        <span class="g-tag"># 机械动力</span>
-                        <span class="g-tag"># 建筑党</span>
-                    </div>
-                </div>
-
-                <!-- CS2 卡片 -->
-                <div class="game-card game-cs">
-                    <div class="g-header">
-                        <span class="g-icon">🔫</span>
-                        <span class="g-name">CS2</span>
-                    </div>
-                    <div class="g-desc">
-                        A1&A4双修玩家<br>R8爱好者，道具大师
-                    </div>
-                </div>
+        <div class="id-group">
+            <h1><span class="highlight">耿星落</span></h1>
+            <div class="alias">
+                <span>梦琳溪</span>
+                <span>Star_Moon_win</span>
             </div>
-        </div>
-
-        <!-- ====== 联系方式 ====== -->
-        <div class="contact-section">
-            <!-- QQ -->
-            <div class="contact-row">
-                <div class="contact-label">
-                    <span class="c-icon">🐧</span> QQ
-                </div>
-                <div class="contact-value" id="qqDisplay">2025612615</div>
-                <button class="btn-copy" onclick="copyText('qqDisplay', '✅ QQ号已复制！')">📋 复制</button>
-            </div>
-            <!-- 邮箱 -->
-            <div class="contact-row">
-                <div class="contact-label">
-                    <span class="c-icon">✉️</span> 邮箱
-                </div>
-                <div class="contact-value" id="emailDisplay">2025612615@qq.com</div>
-                <button class="btn-copy" onclick="copyText('emailDisplay', '✅ 邮箱已复制！')">📋 复制</button>
-            </div>
-        </div>
-
-        <div class="footer">
-            ✦ 随时在线 · 欢迎加好友一起玩 ✦
         </div>
     </div>
 
-    <!-- 引入外部JavaScript文件 -->
-    <script src="script.js"></script>
+    <!-- ====== 游戏偏好 ====== -->
+    <div class="games-section">
+        <div class="section-label">🎯 主玩游戏</div>
+        <div class="game-duo">
+            <!-- MC 卡片 -->
+            <div class="game-card game-mc">
+                <div class="g-header">
+                    <span class="g-icon">⛏️</span>
+                    <span class="g-name">我的世界</span>
+                </div>
+                <div class="g-desc">
+                    建筑 & 生电 & 整合包爱好者<br>喜欢研究机械动力
+                </div>
+                <div class="g-tags">
+                    <span class="g-tag"># 机械动力</span>
+                    <span class="g-tag"># 建筑党</span>
+                </div>
+            </div>
+
+            <!-- CS2 卡片 -->
+            <div class="game-card game-cs">
+                <div class="g-header">
+                    <span class="g-icon">🔫</span>
+                    <span class="g-name">CS2</span>
+                </div>
+                <div class="g-desc">
+                    A1&A4双修玩家<br>R8爱好者，道具大师
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== 联系方式 ====== -->
+    <div class="contact-section">
+        <!-- QQ -->
+        <div class="contact-row">
+            <div class="contact-label">
+                <span class="c-icon">🐧</span> QQ
+            </div>
+            <div class="contact-value" id="qqDisplay">2025612615</div>
+            <button class="btn-copy" onclick="copyText('qqDisplay', '✅ QQ号已复制！')">📋 复制</button>
+        </div>
+        <!-- 邮箱 -->
+        <div class="contact-row">
+            <div class="contact-label">
+                <span class="c-icon">✉️</span> 邮箱
+            </div>
+            <div class="contact-value" id="emailDisplay">2025612615@qq.com</div>
+            <button class="btn-copy" onclick="copyText('emailDisplay', '✅ 邮箱已复制！')">📋 复制</button>
+        </div>
+        <!-- ★★★ 新增：B站入口 ★★★ -->
+        <div class="contact-row">
+            <div class="contact-label">
+                <span class="c-icon">📺</span> B站
+            </div>
+            <a href="https://space.bilibili.com/129101104" target="_blank" class="contact-value" style="text-decoration: none; color: #d0def0; transition: 0.3s;">
+                点击进入我的B站主页 →
+            </a>
+            <span style="width: 76px;"></span> <!-- 占位保持对齐 -->
+        </div>
+    </div>
+
+    <div class="footer">
+        ✦ 随时在线 · 欢迎加好友一起玩 ✦
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
