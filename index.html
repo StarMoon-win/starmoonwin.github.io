@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>耿星落 · 双料玩家</title>
+    <style>
+        /* ===== 全局重置 & 字体 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0c0e14;
+            background-image: radial-gradient(circle at 20% 30%, #1a1f2e, #050608 90%);
+            padding: 20px;
+        }
+
+        /* ===== 主容器卡片 ===== */
+        .card {
+            max-width: 860px;
+            width: 100%;
+            background: rgba(16, 22, 34, 0.75);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            padding: 40px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 180, 255, 0.02);
+            transition: 0.4s ease;
+        }
+
+        /* ===== 顶部头像 & ID ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #2d9cdb, #6c5ce7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 40px rgba(45, 156, 219, 0.25);
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .id-group h1 {
+            color: #eef5ff;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+        .id-group h1 .highlight {
+            background: linear-gradient(135deg, #6ab0fe, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .alias {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin-top: 6px;
+        }
+        .alias span {
+            color: #8899bb;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+        .alias span::before {
+            content: "✦ ";
+            color: #4a6a8a;
+        }
+        .alias .badge-online {
+            background: rgba(100, 200, 150, 0.15);
+            border: 1px solid rgba(100, 200, 150, 0.2);
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: #7cfc9e;
+            -webkit-text-fill-color: #7cfc9e;
+        }
+        .alias span::before {
+            content: "✦ ";
+            color: #4a6a8a;
+        }
+
+        /* ===== 游戏偏好（MC + CS2 双卡） ===== */
+        .games-section {
+            margin-bottom: 35px;
+        }
+        .section-label {
+            color: #5a7a9a;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-label::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+        }
+
+        .game-duo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* 游戏卡片通用 */
+        .game-card {
+            padding: 20px 22px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 24px;
+        }
+        .game-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* MC 卡片（翠绿主题） */
+        .game-mc {
+            border-left: 4px solid #4ade80;
+        }
+        .game-mc:hover {
+            background: rgba(74, 222, 128, 0.05);
+            border-color: #4ade80;
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.08);
+        }
+        .game-mc .g-icon { color: #4ade80; }
+        .game-mc .g-tag { background: rgba(74, 222, 128, 0.12); color: #86efac; }
+
+        /* CS2 卡片（烈焰橙主题） */
+        .game-cs {
+            border-left: 4px solid #fb923c;
+        }
+        .game-cs:hover {
+            background: rgba(251, 146, 60, 0.05);
+            border-color: #fb923c;
+            box-shadow: 0 10px 30px rgba(251, 146, 60, 0.08);
+        }
+        .game-cs .g-icon { color: #fb923c; }
+        .game-cs .g-tag { background: rgba(251, 146, 60, 0.12); color: #fdba74; }
+
+        .game-card .g-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .game-card .g-icon {
+            font-size: 28px;
+        }
+        .game-card .g-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e8f0fa;
+        }
+        .game-card .g-desc {
+            color: #9ab0cc;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .game-card .g-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .game-card .g-tag {
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        /* ===== 联系区域（QQ + 邮箱） ===== */
+        .contact-section {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 28px;
+            padding: 22px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px 20px;
+            padding: 8px 0;
+        }
+        .contact-row:first-child {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 16px;
+            margin-bottom: 12px;
+        }
+
+        .contact-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #7a9aba;
+            font-size: 15px;
+            font-weight: 500;
+            min-width: 60px;
+        }
+        .contact-label .c-icon {
+            font-size: 20px;
+        }
+
+        .contact-value {
+            color: #d0def0;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-family: 'Courier New', monospace;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.03);
+            word-break: break-all;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-copy {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #aac0da;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .btn-copy:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .btn-copy:active {
+            transform: scale(0.95);
+        }
+        .btn-copy.copied {
+            background: rgba(74, 222, 128, 0.15);
+            border-color: #4ade80;
+            color: #86efac;
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #3a4a5a;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 650px) {
+            .card { padding: 28px 18px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .id-group h1 { font-size: 26px; }
+            .game-duo { grid-template-columns: 1fr; }
+            .contact-row { flex-wrap: wrap; }
+            .contact-value { font-size: 16px; min-width: 120px; }
+            .btn-copy { padding: 6px 16px; font-size: 13px; }
+        }
+        @media (max-width: 400px) {
+            .id-group h1 { font-size: 22px; }
+            .alias span { font-size: 13px; }
+            .game-card .g-name { font-size: 17px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <!-- ====== 头部：头像 + 多ID ====== -->
+    <div class="header">
+        <div class="avatar">⭐</div>
+        <div class="id-group">
+            <h1>⚡ <span class="highlight">耿星落</span></h1>
+            <div class="alias">
+                <span>梦琳溪</span>
+                <span>Star_Moon_win</span>
+                <span class="badge-online">● 双料玩家</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== 游戏偏好 ====== -->
+    <div class="games-section">
+        <div class="section-label">🎯 主玩游戏</div>
+        <div class="game-duo">
+            <!-- MC 卡片 -->
+            <div class="game-card game-mc">
+                <div class="g-header">
+                    <span class="g-icon">⛏️</span>
+                    <span class="g-name">我的世界</span>
+                </div>
+                <div class="g-desc">
+                    建筑 & 生电 & 整合包爱好者<br>喜欢研究机械动力与精致内饰
+                </div>
+                <div class="g-tags">
+                    <span class="g-tag"># 机械动力</span>
+                    <span class="g-tag"># 建筑党</span>
+                    <span class="g-tag"># 1.20.1</span>
+                </div>
+            </div>
+
+            <!-- CS2 卡片 -->
+            <div class="game-card game-cs">
+                <div class="g-header">
+                    <span class="g-icon">🔫</span>
+                    <span class="g-name">CS2</span>
+                </div>
+                <div class="g-desc">
+                    竞技休闲双修玩家<br>沙鹰爱好者，道具大师
+                </div>
+                <div class="g-tags">
+                    <span class="g-tag"># 沙鹰</span>
+                    <span class="g-tag"># 爆头哥</span>
+                    <span class="g-tag"># 完美A段</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== 联系方式 ====== -->
+    <div class="contact-section">
+        <!-- QQ -->
+        <div class="contact-row">
+            <div class="contact-label">
+                <span class="c-icon">🐧</span> QQ
+            </div>
+            <div class="contact-value" id="qqDisplay">2025612615</div>
+            <button class="btn-copy" onclick="copyText('qqDisplay', '✅ QQ号已复制！')">📋 复制</button>
+        </div>
+        <!-- 邮箱 -->
+        <div class="contact-row">
+            <div class="contact-label">
+                <span class="c-icon">✉️</span> 邮箱
+            </div>
+            <div class="contact-value" id="emailDisplay">2025612615@qq.com</div>
+            <button class="btn-copy" onclick="copyText('emailDisplay', '✅ 邮箱已复制！')">📋 复制</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        ✦ 随时在线 · 欢迎加好友一起玩 ✦
+    </div>
+</div>
+
+<script>
+    // =============================================
+    // 通用复制函数（带优雅提示反馈）
+    // =============================================
+    function copyText(elementId, successMsg) {
+        const element = document.getElementById(elementId);
+        const text = element.innerText.trim();
+        const button = event.target.closest('.btn-copy'); // 获取点击的按钮
+
+        if (!navigator.clipboard) {
+            // 降级方案（针对非 HTTPS 或旧浏览器）
+            const input = document.createElement('input');
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            try {
+                document.execCommand('copy');
+                alert(successMsg || '✅ 已复制！');
+            } catch (err) {
+                alert('❌ 复制失败，请手动复制：' + text);
+            }
+            document.body.removeChild(input);
+            return;
+        }
+
+        // 现代 Clipboard API
+        navigator.clipboard.writeText(text).then(() => {
+            // 按钮闪烁反馈
+            if (button) {
+                button.classList.add('copied');
+                button.textContent = '✅ 已复制';
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = '📋 复制';
+                }, 1800);
+            } else {
+                alert(successMsg || '✅ 已复制！');
+            }
+        }).catch(() => {
+            alert('❌ 复制失败，请手动复制：' + text);
+        });
+    }
+</script>
+
+</body>
+</html>
