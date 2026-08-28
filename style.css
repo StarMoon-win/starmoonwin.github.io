@@ -1,0 +1,313 @@
+/* ===== 全局重置 & 字体 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0c0e14;
+    background-image: radial-gradient(circle at 20% 30%, #1a1f2e, #050608 90%);
+    padding: 20px;
+}
+
+/* ===== 主容器卡片 ===== */
+.card {
+    max-width: 860px;
+    width: 100%;
+    background: rgba(16, 22, 34, 0.75);
+    backdrop-filter: blur(16px);
+    border-radius: 48px;
+    padding: 40px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 180, 255, 0.02);
+    transition: 0.4s ease;
+}
+
+/* ===== 顶部头像 & ID ===== */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #2d9cdb, #6c5ce7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 40px rgba(45, 156, 219, 0.25);
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.id-group h1 {
+    color: #eef5ff;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+.id-group h1 .highlight {
+    background: linear-gradient(135deg, #6ab0fe, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.alias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    margin-top: 6px;
+}
+.alias span {
+    color: #8899bb;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+.alias span::before {
+    content: "✦ ";
+    color: #4a6a8a;
+}
+.alias .badge-online {
+    background: rgba(100, 200, 150, 0.15);
+    border: 1px solid rgba(100, 200, 150, 0.2);
+    padding: 2px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    color: #7cfc9e;
+    -webkit-text-fill-color: #7cfc9e;
+}
+.alias span::before {
+    content: "✦ ";
+    color: #4a6a8a;
+}
+
+/* ===== 游戏偏好（MC + CS2 双卡） ===== */
+.games-section {
+    margin-bottom: 35px;
+}
+.section-label {
+    color: #5a7a9a;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+}
+
+.game-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* 游戏卡片通用 */
+.game-card {
+    padding: 20px 22px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+.game-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 24px;
+}
+.game-card:hover {
+    transform: translateY(-4px);
+}
+
+/* MC 卡片（翠绿主题） */
+.game-mc {
+    border-left: 4px solid #4ade80;
+}
+.game-mc:hover {
+    background: rgba(74, 222, 128, 0.05);
+    border-color: #4ade80;
+    box-shadow: 0 10px 30px rgba(74, 222, 128, 0.08);
+}
+.game-mc .g-icon { color: #4ade80; }
+.game-mc .g-tag { background: rgba(74, 222, 128, 0.12); color: #86efac; }
+
+/* CS2 卡片（烈焰橙主题） */
+.game-cs {
+    border-left: 4px solid #fb923c;
+}
+.game-cs:hover {
+    background: rgba(251, 146, 60, 0.05);
+    border-color: #fb923c;
+    box-shadow: 0 10px 30px rgba(251, 146, 60, 0.08);
+}
+.game-cs .g-icon { color: #fb923c; }
+.game-cs .g-tag { background: rgba(251, 146, 60, 0.12); color: #fdba74; }
+
+.game-card .g-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.game-card .g-icon {
+    font-size: 28px;
+}
+.game-card .g-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e8f0fa;
+}
+.game-card .g-desc {
+    color: #9ab0cc;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+.game-card .g-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.game-card .g-tag {
+    padding: 2px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ===== 联系区域（QQ + 邮箱） ===== */
+.contact-section {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 28px;
+    padding: 22px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+.contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    padding: 8px 0;
+}
+.contact-row:first-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 16px;
+    margin-bottom: 12px;
+}
+
+.contact-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #7a9aba;
+    font-size: 15px;
+    font-weight: 500;
+    min-width: 60px;
+}
+.contact-label .c-icon {
+    font-size: 20px;
+}
+
+.contact-value {
+    color: #d0def0;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+    background: rgba(0,0,0,0.3);
+    padding: 4px 16px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.03);
+    word-break: break-all;
+    flex: 1;
+    min-width: 150px;
+}
+
+.btn-copy {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #aac0da;
+    padding: 8px 22px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+.btn-copy:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+.btn-copy:active {
+    transform: scale(0.95);
+}
+.btn-copy.copied {
+    background: rgba(74, 222, 128, 0.15);
+    border-color: #4ade80;
+    color: #86efac;
+}
+
+/* ===== 底部 ===== */
+.footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #3a4a5a;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 650px) {
+    .card { padding: 28px 18px; }
+    .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .id-group h1 { font-size: 26px; }
+    .game-duo { grid-template-columns: 1fr; }
+    .contact-row { flex-wrap: wrap; }
+    .contact-value { font-size: 16px; min-width: 120px; }
+    .btn-copy { padding: 6px 16px; font-size: 13px; }
+}
+@media (max-width: 400px) {
+    .id-group h1 { font-size: 22px; }
+    .alias span { font-size: 13px; }
+    .game-card .g-name { font-size: 17px; }
+}
