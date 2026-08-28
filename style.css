@@ -51,8 +51,8 @@ body {
 }
 /* 额外让图片填满容器 */
 .avatar img {
-    width: 20%;
-    height: 20%;
+    width: 80%;
+    height: 80%;
     object-fit: cover;        /* 保持比例裁剪 */
     display: block;
 }
