@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>耿星落</title>
+    <title>耿星落 · MC/CS2 玩家 · 个人主页</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <!-- CS2 卡片 -->
+            <!-- CS2 卡片（已添加标签） -->
             <div class="game-card game-cs">
                 <div class="g-header">
                     <span class="g-icon">🔫</span>
@@ -51,6 +51,28 @@
                 </div>
                 <div class="g-desc">
                     A1&A4双修玩家<br>R8爱好者，道具大师
+                </div>
+                <div class="g-tags">
+                    <span class="g-tag"># R8</span>
+                    <span class="g-tag"># 混子</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== MC服务器状态查询（固定IP，自动查询） ====== -->
+    <div class="games-section" style="margin-top: 10px;">
+        <div class="section-label">🟢 服务器状态</div>
+        <div class="server-card">
+            <!-- ★★★ 固定服务器 IP，用户不可修改 ★★★ -->
+            <input type="hidden" id="serverIp" value="play.simpfun.cn:10878">
+            <div class="server-input-group" style="justify-content: center;">
+                <button class="btn-mc" onclick="queryServer()" style="width: auto; min-width: 140px;">🔄 刷新状态</button>
+                <span style="color: #5a7a5a; font-size: 13px; margin-left: 10px;">📍 play.simpfun.cn:10878</span>
+            </div>
+            <div id="status-panel">
+                <div style="color: #5a7a5a; padding: 10px; text-align: center; font-size: 14px;">
+                    ⏳ 正在查询服务器状态...
                 </div>
             </div>
         </div>
@@ -74,12 +96,12 @@
             <div class="contact-value" id="emailDisplay">2025612615@qq.com</div>
             <button class="btn-copy" onclick="copyText('emailDisplay', '✅ 邮箱已复制！')">📋 复制</button>
         </div>
-       <!-- B站入口（按钮样式） -->
+        <!-- B站 -->
         <div class="contact-row">
             <div class="contact-label">
                 <span class="c-icon">📺</span> B站
             </div>
-            <div style="flex:1;"></div> <!-- 占位把按钮推到右边，和复制按钮对齐 -->
+            <div style="flex:1;"></div>
             <a href="https://space.bilibili.com/129101104" target="_blank" class="btn-copy" style="text-decoration: none; display: inline-flex; align-items: center; gap:6px;">
                 🚀 前往B站主页
             </a>
@@ -106,8 +128,11 @@
         </div>
     </div>
 
+    <!-- ====== 底部（已添加更新时间） ====== -->
     <div class="footer">
         ✦ 随时在线 · 欢迎加好友一起玩 ✦
+        <br>
+        <span style="font-size: 10px; color: #3a4a4a;">📅 最后更新：2026年8月</span>
     </div>
 </div>
 

@@ -16,7 +16,7 @@ body {
     padding: 20px;
 }
 
-/* ===== 主容器卡片 ===== */
+/* ===== 主容器卡片 + 淡入动画 ===== */
 .card {
     max-width: 860px;
     width: 100%;
@@ -27,6 +27,19 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 180, 255, 0.02);
     transition: 0.4s ease;
+    /* ★★★ 页面加载淡入动画 ★★★ */
+    animation: fadeInUp 0.7s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===== 顶部头像 & ID ===== */
@@ -44,16 +57,15 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 28px;
-    overflow: hidden;          /* 让图片填满圆角 */
+    overflow: hidden;
     flex-shrink: 0;
     box-shadow: 0 0 40px rgba(45, 156, 219, 0.25);
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
-/* 额外让图片填满容器 */
 .avatar img {
     width: 100%;
     height: 100%;
-    object-fit: cover;        /* 保持比例裁剪 */
+    object-fit: cover;
     display: block;
 }
 
@@ -86,21 +98,8 @@ body {
     content: "✦ ";
     color: #4a6a8a;
 }
-.alias .badge-online {
-    background: rgba(100, 200, 150, 0.15);
-    border: 1px solid rgba(100, 200, 150, 0.2);
-    padding: 2px 14px;
-    border-radius: 30px;
-    font-size: 12px;
-    color: #7cfc9e;
-    -webkit-text-fill-color: #7cfc9e;
-}
-.alias span::before {
-    content: "✦ ";
-    color: #4a6a8a;
-}
 
-/* ===== 游戏偏好（MC + CS2 双卡） ===== */
+/* ===== 游戏偏好 ===== */
 .games-section {
     margin-bottom: 35px;
 }
@@ -127,7 +126,6 @@ body {
     gap: 16px;
 }
 
-/* 游戏卡片通用 */
 .game-card {
     padding: 20px 22px;
     border-radius: 24px;
@@ -138,22 +136,10 @@ body {
     position: relative;
     overflow: hidden;
 }
-.game-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 24px;
-}
 .game-card:hover {
     transform: translateY(-4px);
 }
 
-/* MC 卡片（翠绿主题） */
 .game-mc {
     border-left: 4px solid #4ade80;
 }
@@ -165,7 +151,6 @@ body {
 .game-mc .g-icon { color: #4ade80; }
 .game-mc .g-tag { background: rgba(74, 222, 128, 0.12); color: #86efac; }
 
-/* CS2 卡片（烈焰橙主题） */
 .game-cs {
     border-left: 4px solid #fb923c;
 }
@@ -209,7 +194,101 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* ===== 联系区域（QQ + 邮箱） ===== */
+/* ===== MC服务器状态卡片 ===== */
+.server-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
+    padding: 20px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.server-input-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.btn-mc {
+    padding: 12px 30px;
+    background: #2d6b2d;
+    border: none;
+    border-radius: 40px;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-shadow: 0 2px 0 #1a3f1a;
+    box-shadow: 0 5px 0 #1a3f1a;
+    cursor: pointer;
+    transition: all 0.08s linear;
+    white-space: nowrap;
+}
+.btn-mc:hover {
+    background: #3a8a3a;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #1a3f1a;
+}
+.btn-mc:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #1a3f1a;
+}
+
+#status-panel {
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 auto 6px auto;
+}
+.status-online {
+    background: #1a5a1a;
+    color: #8fff8f;
+    border: 1px solid #5f9f5f;
+}
+.status-offline {
+    background: #5a1a1a;
+    color: #ff8f8f;
+    border: 1px solid #9f5f5f;
+}
+.status-loading {
+    background: #3a3a1a;
+    color: #ffff8f;
+    border: 1px solid #9f9f5f;
+}
+
+.player-count {
+    font-size: 32px;
+    font-weight: 900;
+    color: #7cfc9e;
+    text-shadow: 0 0 30px rgba(124, 252, 158, 0.3);
+}
+.player-count span {
+    font-size: 18px;
+    color: #8a9a8a;
+}
+.motd-text {
+    color: #aab8c8;
+    font-style: italic;
+    margin-top: 4px;
+    font-size: 13px;
+}
+.error-text {
+    color: #ff7a7a;
+    font-weight: 600;
+}
+
+/* ===== 联系区域 ===== */
 .contact-section {
     background: rgba(0, 0, 0, 0.25);
     border-radius: 28px;
@@ -294,135 +373,41 @@ body {
     color: #3a4a5a;
     font-size: 12px;
     letter-spacing: 2px;
+    line-height: 1.8;
 }
 
 /* ===== 响应式 ===== */
-
-/* 平板和小屏笔记本 (小于 900px) */
 @media (max-width: 900px) {
-    .card {
-        padding: 30px 24px;
-    }
+    .card { padding: 30px 24px; }
 }
 
-/* ===== 手机端 (小于 650px) ===== */
 @media (max-width: 650px) {
-    .card {
-        padding: 24px 16px;
-        border-radius: 32px;
-    }
-
-    /* 头部：改为竖排，文字居中 */
-    .header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .id-group h1 {
-        font-size: 26px;
-    }
-
-    .alias {
-        justify-content: center;
-    }
-    .alias span {
-        font-size: 14px;
-    }
-
-    /* 游戏卡片：从两列变一列 */
-    .game-duo {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
-    .game-card {
-        padding: 16px 18px;
-    }
-    .game-card .g-name {
-        font-size: 18px;
-    }
-    .game-card .g-desc {
-        font-size: 13px;
-    }
-
-    /* ===== 联系方式（手机重点优化） ===== */
-    .contact-section {
-        padding: 16px 16px;
-        border-radius: 20px;
-    }
-
-    .contact-row {
-        flex-wrap: wrap;
-        gap: 10px 8px;
-        padding: 8px 0;
-    }
-
-    .contact-label {
-        font-size: 14px;
-        min-width: 40px;
-    }
-    .contact-label .c-icon {
-        font-size: 18px;
-    }
-
-    /* QQ号/邮箱 文本 */
-    .contact-value {
-        font-size: 15px;
-        padding: 6px 12px;
-        min-width: 100px;
-        flex: 1 1 auto;
-        text-align: center;
-    }
-
-    /* ★★★ 关键优化：按钮变大，方便手指点击（至少 44px 高度） ★★★ */
-    .btn-copy,
-    .contact-row a.btn-copy {
-        padding: 10px 18px;
-        font-size: 14px;
-        min-height: 44px;
-        min-width: 80px;
-        justify-content: center;
-    }
-
-    /* B站按钮单独调整，确保和复制按钮对齐 */
-    .contact-row a.btn-copy {
-        flex: 0 0 auto;
-    }
-
-    /* 底部文字 */
-    .footer {
-        font-size: 11px;
-        margin-top: 20px;
-    }
+    .card { padding: 24px 16px; border-radius: 32px; }
+    .header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+    .id-group h1 { font-size: 26px; }
+    .alias { justify-content: center; }
+    .alias span { font-size: 14px; }
+    .game-duo { grid-template-columns: 1fr; gap: 14px; }
+    .game-card { padding: 16px 18px; }
+    .game-card .g-name { font-size: 18px; }
+    .game-card .g-desc { font-size: 13px; }
+    .contact-section { padding: 16px; border-radius: 20px; }
+    .contact-row { flex-wrap: wrap; gap: 10px 8px; padding: 8px 0; }
+    .contact-label { font-size: 14px; min-width: 40px; }
+    .contact-label .c-icon { font-size: 18px; }
+    .contact-value { font-size: 15px; padding: 6px 12px; min-width: 100px; flex: 1 1 auto; text-align: center; }
+    .btn-copy, .contact-row a.btn-copy { padding: 10px 18px; font-size: 14px; min-height: 44px; min-width: 80px; justify-content: center; }
+    .contact-row a.btn-copy { flex: 0 0 auto; }
+    .footer { font-size: 11px; margin-top: 20px; }
+    .server-input-group { flex-direction: column; }
+    .btn-mc { width: 100%; justify-content: center; padding: 14px; }
+    .player-count { font-size: 26px; }
 }
 
-/* ===== 超小屏手机 (小于 400px) ===== */
 @media (max-width: 400px) {
-    .id-group h1 {
-        font-size: 22px;
-    }
-
-    .alias span {
-        font-size: 12px;
-    }
-
-    .contact-value {
-        font-size: 13px;
-        padding: 4px 8px;
-        min-width: 80px;
-    }
-
-    .btn-copy,
-    .contact-row a.btn-copy {
-        padding: 8px 12px;
-        font-size: 12px;
-        min-height: 38px;
-        min-width: 60px;
-    }
-
-    .game-card .g-name {
-        font-size: 16px;
-    }
+    .id-group h1 { font-size: 22px; }
+    .alias span { font-size: 12px; }
+    .contact-value { font-size: 13px; padding: 4px 8px; min-width: 80px; }
+    .btn-copy, .contact-row a.btn-copy { padding: 8px 12px; font-size: 12px; min-height: 38px; min-width: 60px; }
+    .game-card .g-name { font-size: 16px; }
 }
